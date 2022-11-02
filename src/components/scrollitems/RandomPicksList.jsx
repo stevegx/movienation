@@ -1,6 +1,6 @@
 import React from 'react'
 import movies from '../../movies.json'
-import CardRandom from './CardRandom';
+import Card from './Card';
 export default function RandomPicksList({RowID}) {
     let randomNumber = Math.floor(Math.random()*500)
  let movie = movies.splice(randomNumber,10)
@@ -27,7 +27,7 @@ export default function RandomPicksList({RowID}) {
                 <div id={'slider'+RowID} className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative active:text-blue-600'>
                     {movie.map(element =>{
                         return(
-                            <CardRandom
+                            <Card
                             key= {element.id}
                             movie={element}/>
                         )

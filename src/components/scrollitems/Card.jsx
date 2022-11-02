@@ -1,16 +1,21 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom"
 
 export default function FeaturedTodayCard({movie}) {
     let image = 'https://image.tmdb.org/t/p/original/'
+    const navigate = useNavigate()
+    const handleClick=(e)=>{
+      navigate(`/${movie.title}`)
+  }
 
   return (
 
-    <div className='inline-block cursor-pointer p-2 group'>
-    <img className='h-56 w-40 rounded-lg my-2 group-hover:h-72 group-hover:w-56' src={image+movie.poster_path} alt={movie.title} />
+    <div onClick={handleClick}  className='inline-block cursor-pointer p-2 group'>
+    <img  className='h-56 w-40 rounded-lg my-2 group-hover:h-72 group-hover:w-56' src={image+movie.poster_path} alt={movie.title} />
     <div className='bg-neutral-800 bg-opacity-80 rounded-lg absolute top-4 h-72 w-56 hidden group-hover:block py-16 group-hover:max-md:w-40 max-md:py-2'>
       <p className='text-xl group-hover:truncate text-center'>{movie.title}</p>
       <div className='flex p-5 justify-center flex-wrap'>
-        <div className='flex'>
+        <div  className='flex'>
         <h2 className='text-center mr-3'>{movie.original_language}</h2>
         </div>
       <h2 className='pr-3'>{movie.certification}</h2>

@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function SeriesCard({series}) {
-    console.log(series);
+    // console.log(series);
     return (
 
         <div className='inline-block cursor-pointer p-2 group'>

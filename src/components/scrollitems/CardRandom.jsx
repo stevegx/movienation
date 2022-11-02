@@ -1,11 +1,16 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom"
 
 export default function CardRandom({movie}) {
 
     let image = 'https://image.tmdb.org/t/p/original/'
+    const navigate = useNavigate()
+    const handleClick=(e)=>{
+      navigate(`/${movie.title}`)
+  }
   return (
   
-    <div className='inline-block cursor-pointer p-2 group'>
+    <div onClick={handleClick} className='inline-block cursor-pointer p-2 group'>
     <img className='h-72 w-60  rounded-lg my-2' src={image+movie.poster_path} alt={movie.title} />
     <div className='bg-neutral-800 bg-opacity-80 rounded-lg absolute top-4 h-72 w-60 hidden group-hover:block py-16 group-hover:max-md:w-40 max-md:py-2'>
       <p className='text-xl group-hover:truncate text-center'>{movie.title}</p>

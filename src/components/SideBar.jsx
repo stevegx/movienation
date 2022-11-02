@@ -1,12 +1,19 @@
 import React, {useState} from 'react'
-
+import {useNavigate} from 'react-router-dom'
 export default function SideBar() {
+
   const [userOpen,setUserOpen] = useState(false)
   const [moviesOpen,setMoviesOpen] = useState(false)
   const [seriesOpen,setSeriesOpen] = useState(false)
+  const navigate = useNavigate()
+
+  const handleClick=(e)=>{
+    navigate(`/`)
+}
+
   return (
 <div className='flex-col bg-neutral-800 w-fit h-screen p-3 sticky top-0 text-zinc-50'>
-<h2 className='text-3xl font-bold text-zinc-50 cursor-pointer hover:brightness-125 active:brightness-90'> <span className='text-blue-600  font-black'>Movie</span>Nation</h2>
+<h2 onClick={handleClick} className='text-3xl font-bold text-zinc-50 cursor-pointer hover:brightness-125 active:brightness-90'> <span className='text-blue-600  font-black'>Movie</span>Nation</h2>
 <div className='flex-col text-zinc-50 my-4'>
   <div onClick={()=>{setUserOpen(!userOpen)}} className='flex  gap-2 hover:bg-neutral-700 hover:rounded-xl p-2 cursor-pointer'>
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
