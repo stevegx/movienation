@@ -17,7 +17,7 @@ export default function UpcomingListSeries({RowID}) {
 
   return (
       <>
-      <h1 className='text-2xl m-2 mt-10'>Featured Today:</h1>
+      <h1 className='text-2xl m-2 mt-10'>Upcoming Series:</h1>
       <div className='relative flex items-center'>
       <button onClick={slideToLeft} className=' left-0 rounded-xl absolute cursor-pointer z-10 bg-neutral-700 bg-opacity-70 p-10 max-md:p-5'>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

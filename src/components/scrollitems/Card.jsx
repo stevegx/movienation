@@ -5,7 +5,7 @@ export default function FeaturedTodayCard({movie}) {
     let image = 'https://image.tmdb.org/t/p/original/'
     const navigate = useNavigate()
     const handleClick=(e)=>{
-      navigate(`/${movie.title}`)
+      navigate(`/movies/${movie.title}`,{state:{movie}})
   }
 
   return (
