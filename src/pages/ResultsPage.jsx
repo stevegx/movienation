@@ -12,8 +12,8 @@ export default function ResultsPage() {
   return (
     <div className='flex bg-neutral-900 text-zinc-50'>
         <SideBar/>
-        <div className='flex flex-wrap justify-center items-center gap-10 m-5'>
-        {movies.length>0?<div className='flex flex-wrap justify-center items-center gap-10'>
+        <div className='flex flex-wrap m-10'>
+        {movies.length>0?<div className='flex flex-wrap gap-9'>
         {movies.map(element =>{
                         return(
                             <SearchCard
@@ -23,7 +23,7 @@ export default function ResultsPage() {
                     })}
         </div>:''}
        
-        {series.length>0?<div className='flex flex-wrap justify-center items-center gap-10'>
+        {series.length>0?<div className=''>
         {series.map(element =>{
                         return(
                             <SearchCardSeries

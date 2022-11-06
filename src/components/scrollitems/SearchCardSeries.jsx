@@ -9,9 +9,9 @@ export default function SearchCardSeries({series}) {
 }
     return (
 
-        <div onClick={handleClick}  className='inline-block relative cursor-pointer p-2 group'>
+        <div onClick={handleClick}  className='inline-block relative cursor-pointer p-2 group transition-all delay-500 h-56 w-42'>
         <img className='h-56 w-40 rounded-lg my-2 ' src={series.image.medium} alt={series.name} />
-        <div className='bg-neutral-800 bg-opacity-80 rounded-lg absolute top-4 h-56 w-40 hidden group-hover:block py-16 group-hover:max-md:w-40 max-md:py-2'>
+        <div className='bg-neutral-800 bg-opacity-80 rounded-lg absolute top-4 h-56 w-40 hidden group-hover:block py-16'>
           <p className='text-xl group-hover:truncate text-center'>{series.name}</p>
           <div className='flex p-5 justify-center flex-wrap'>
             <div className='flex'>
