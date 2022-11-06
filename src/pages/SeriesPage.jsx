@@ -39,7 +39,7 @@ export default function SeriesPage() {
                         <h2>{seriesPage.externals.thetvdb}</h2>
                     </div>
                 </div>
-                <div className='flex px-16 my-24 justify-center items-center gap-10 flex-wrap'>
+                <div className='flex px-16 my-12 justify-center items-center gap-10 flex-wrap'>
                     <img className='w-2/6 h-1/6 rounded-xl max-md:w-full' src={seriesPage.image.original} alt={seriesPage.name} />
                     <p className='text-center text-xl'>{seriesPage.summary}</p>
                 </div>
