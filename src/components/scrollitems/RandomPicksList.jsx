@@ -7,11 +7,11 @@ export default function RandomPicksList({RowID}) {
 
     const slideToLeft = () => {
         var slider = document.getElementById('slider'+RowID);
-        slider.scrollLeft = slider.scrollLeft - 500;
+        slider.scrollLeft = slider.scrollLeft - 100;
       };
       const slideToRight = () => {
         var slider = document.getElementById('slider'+RowID);
-        slider.scrollLeft = slider.scrollLeft + 500;
+        slider.scrollLeft = slider.scrollLeft + 100;
       };
     
 

@@ -1,18 +1,70 @@
 import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import movies from '../movies.json'
+import series from '../tvshows.json'
 export default function SideBar() {
 
   const [userOpen,setUserOpen] = useState(false)
   const [moviesOpen,setMoviesOpen] = useState(false)
   const [seriesOpen,setSeriesOpen] = useState(false)
+  const [searchValue,setSearchValue] = useState('')
   const navigate = useNavigate()
 
   const handleClick=(e)=>{
     navigate(`/`)
 }
 
+const handleClickMovies=(e)=>{
+  const page=e.target.innerText
+  
+  let movieProvider = movies
+  switch (page) {
+    case 'Top-100 Movies':
+      movieProvider = movieProvider.sort((a,b)=>b.vote_average - a.vote_average)
+    break;
+    case 'Most Popular Movies':
+      movieProvider = movieProvider.sort((a,b)=>b.vote_count - a.vote_count)
+    break;
+    case 'Top Box Office':
+      movieProvider = movieProvider.sort((a,b)=>b.revenue - a.revenue)
+    break;
+  
+    default:
+      break;
+  }
+  navigate(`/MoviesList/${page}`,{state:[{movieProvider},page]})
+}
+
+const handleClickSeries=(e)=>{
+  const page=e.target.innerText
+  
+  let seriesProvider = series
+  switch (page) {
+    case 'Top-100 Series':
+      seriesProvider = seriesProvider.sort((a,b)=>b.rating.average - a.rating.average)
+    break;
+    case 'Most Popular Series':
+      seriesProvider = seriesProvider.sort((a,b)=>b.externals.tvrage - a.externals.tvrage)
+    break;
+    case 'Top Box Office':
+      seriesProvider = seriesProvider.sort((a,b)=>b.revenue - a.revenue)
+    break;
+  
+    default:
+      break;
+  }
+  navigate(`/SeriesList/${page}`,{state:[{seriesProvider},page]})
+}
+
+const handleSearch=(e)=>{
+  e.preventDefault()
+    let searchMovies = movies.filter(element=> element.title.toLowerCase().includes(searchValue.toLowerCase()))
+    let searchSeries = series.filter(element=> element.name.toLowerCase().includes(searchValue.toLowerCase()))
+  navigate('/searchResults/',{state:{searchMovies,searchSeries}})  
+}
+
   return (
-<div className='flex-col bg-neutral-800 w-fit h-screen p-3 sticky top-0 text-zinc-50'>
+<div className='flex-col bg-neutral-800 w-fit h-screen max-sm:w-54 p-3 sticky top-0 text-zinc-50'>
 <h2 onClick={handleClick} className='text-3xl font-bold text-zinc-50 cursor-pointer hover:brightness-125 active:brightness-90'> <span className='text-blue-600  font-black'>Movie</span>Nation</h2>
 <div className='flex-col text-zinc-50 my-4'>
   <div onClick={()=>{setUserOpen(!userOpen)}} className='flex  gap-2 hover:bg-neutral-700 hover:rounded-xl p-2 cursor-pointer'>
@@ -43,12 +95,12 @@ export default function SideBar() {
       </div>
     </div>
 </div>
-<div className='flex bg-zinc-50 rounded-xl items-center my-6'>
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 m-1">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-  </svg>
-  <input type="search" name="" id="" className='cursor-pointer outline-none border-none rounded-xl font-medium p-1 '/>
-</div>
+<form onSubmit={handleSearch} className='flex items-center bg-zinc-50 rounded-xl text-black my-5'> 
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 m-1">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+    </svg>
+    <input type="search" value={searchValue} onChange={(e)=>(setSearchValue(e.target.value))} className='cursor-pointer outline-none border-none rounded-xl p-1'/>
+</form>
 
 <div onClick={()=>{setMoviesOpen(!moviesOpen)}} className='flex  gap-2 hover:bg-neutral-700 hover:rounded-xl p-2 cursor-pointer'>
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -63,16 +115,13 @@ export default function SideBar() {
   </svg>
   </div>
     <div className={(moviesOpen?'flex-col align-center':'hidden')}>
-      <div className='flex hover:bg-neutral-700 hover:rounded-xl cursor-pointer py-2 pl-8 gap-3 hover:text-blue-500 active:bg-neutral-600'>
+      <div onClick={handleClickMovies} className='flex hover:bg-neutral-700 hover:rounded-xl cursor-pointer py-2 pl-8 gap-3 hover:text-blue-500 active:bg-neutral-600'>
       <h3>Top-100 Movies</h3>
       </div>
-      <div className='flex hover:bg-neutral-700 hover:rounded-xl cursor-pointer py-2 pl-8 gap-3 hover:text-blue-500 active:bg-neutral-600'>
+      <div onClick={handleClickMovies} className='flex hover:bg-neutral-700 hover:rounded-xl cursor-pointer py-2 pl-8 gap-3 hover:text-blue-500 active:bg-neutral-600'>
       <h3>Most Popular Movies</h3>
       </div>
-      <div className='flex hover:bg-neutral-700 hover:rounded-xl cursor-pointer py-2 pl-8 gap-3 hover:text-blue-500 active:bg-neutral-600'>
-      <h3>New Movies</h3>
-      </div>
-      <div className='flex hover:bg-neutral-700 hover:rounded-xl cursor-pointer py-2 pl-8 gap-3 hover:text-blue-500 active:bg-neutral-600'>
+      <div onClick={handleClickMovies} className='flex hover:bg-neutral-700 hover:rounded-xl cursor-pointer py-2 pl-8 gap-3 hover:text-blue-500 active:bg-neutral-600'>
       <h3>Top Box Office</h3>
       </div>
     </div>
@@ -90,16 +139,13 @@ export default function SideBar() {
       </svg>
     </div>
       <div className={(seriesOpen?'flex-col align-center':'hidden')}>
-        <div className='flex hover:bg-neutral-700 hover:rounded-xl cursor-pointer py-2 pl-8 gap-3 hover:text-blue-500 active:bg-neutral-600'>
+        <div onClick={handleClickSeries} className='flex hover:bg-neutral-700 hover:rounded-xl cursor-pointer py-2 pl-8 gap-3 hover:text-blue-500 active:bg-neutral-600'>
         <h3>Top-100 Series</h3>
         </div>
-        <div className='flex hover:bg-neutral-700 hover:rounded-xl cursor-pointer py-2 pl-8 gap-3 hover:text-blue-500 active:bg-neutral-600'>
+        <div onClick={handleClickSeries} className='flex hover:bg-neutral-700 hover:rounded-xl cursor-pointer py-2 pl-8 gap-3 hover:text-blue-500 active:bg-neutral-600'>
         <h3>Most Popular Series</h3>
         </div>
-        <div className='flex hover:bg-neutral-700 hover:rounded-xl cursor-pointer py-2 pl-8 gap-3 hover:text-blue-500 active:bg-neutral-600'>
-        <h3>New Series</h3>
-        </div>
-        <div className='flex hover:bg-neutral-700 hover:rounded-xl cursor-pointer py-2 pl-8 gap-3 hover:text-blue-500 active:bg-neutral-600'>
+        <div onClick={handleClickSeries} className='flex hover:bg-neutral-700 hover:rounded-xl cursor-pointer py-2 pl-8 gap-3 hover:text-blue-500 active:bg-neutral-600'>
         <h3>Top Box Office</h3>
         </div>
       </div>

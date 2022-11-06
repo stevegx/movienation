@@ -6,18 +6,14 @@ import SideBar from '../components/SideBar'
 
 export default function MoviePage() {
   const location = useLocation()
-  console.log(location);
   const moviePage = location.state.movie 
   let image = 'https://image.tmdb.org/t/p/original/'
  
-// console.log(moviePage);
+
 
   return (
     <div className='flex bg-neutral-900 text-zinc-50'>
-      {/* <div className='max-sm:hidden'> */}
       <SideBar/>
-      {/* </div> */}
-      
       <div className='w-screen h-screen overflow-x-hidden scroll-smooth'>
         <h1 className='text-center text-4xl mt-4'>{moviePage.title}</h1>
         <div className='flex gap-4 text-gray-400 justify-center my-3 flex-wrap'>
@@ -48,13 +44,13 @@ export default function MoviePage() {
                         <h2>{moviePage.popularity}</h2>
                     </div>
         </div>
-        <div className='flex mx-10 mt-10 justify-center items-center gap-10'>
-            <img className='w-2/6 h-1/6 rounded-xl' src={image+moviePage.poster_path}alt={moviePage.title} />
-            <p className='text-center text-xl'>{moviePage.overview}</p>
+        <div className='flex mx-10 mt-10 justify-center items-center gap-10 flex-wrap'>
+            <img className='w-2/6 h-1/6 rounded-xl max-md:w-full' src={image+moviePage.poster_path}alt={moviePage.title} />
+            <p className='text-center text-xl max-md:text-l'>{moviePage.overview}</p>
         </div>
         <div className='flex justify-center mt-5 gap-3 flex-wrap'>
         <h1>Language: <span className='text-blue-500'>{moviePage.original_language}</span></h1>
-              <div className='flex flex-wrap'>
+              <div className='flex flex-wrap justify-center'>
                 <h1 className='mx-1.5'>Release Date: <span className='text-blue-500'>{moviePage.release_date}</span></h1>
                 <h1 className='mx-1.5'>Director: <span className='text-blue-500'>{moviePage.directors[0].name}</span></h1>
                 <h1>Cast:</h1>

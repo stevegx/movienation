@@ -13,7 +13,7 @@ export default function SeriesPage() {
         <SideBar/>
         <div className='w-screen h-screen overflow-x-hidden scroll-smooth'>
             <h1 className='text-center text-4xl mt-4'>{seriesPage.name} <span className='text-gray-300 text-3xl'>({seriesPage.premiered})</span></h1>   
-                <div className='flex gap-4 text-gray-400 justify-center my-5'>
+                <div className='flex gap-4 text-gray-400 justify-center my-5 flex-wrap'>
                     <h1>Status: {seriesPage.status}</h1>
                     {seriesPage.genres.map((element)=>{
                 return(
@@ -39,8 +39,8 @@ export default function SeriesPage() {
                         <h2>{seriesPage.externals.thetvdb}</h2>
                     </div>
                 </div>
-                <div className='flex px-16 my-24 justify-center items-center gap-10'>
-                    <img className='w-2/6 h-1/6 rounded-xl' src={seriesPage.image.original} alt={seriesPage.name} />
+                <div className='flex px-16 my-24 justify-center items-center gap-10 flex-wrap'>
+                    <img className='w-2/6 h-1/6 rounded-xl max-md:w-full' src={seriesPage.image.original} alt={seriesPage.name} />
                     <p className='text-center text-xl'>{seriesPage.summary}</p>
                 </div>
                 <div className='flex justify-center gap-3 pt-8'>
